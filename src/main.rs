@@ -1,0 +1,42 @@
+use clap::Parser;
+use std::fs::File;
+use std::io::Read;
+use std::io::{self, BufRead, BufReader};
+use std::process::Command;
+
+#[derive(Parser)]
+#[command(name = "xpector")]
+#[command(about = "this is gonna hack yo ass")]
+struct Args {
+    #[arg(short = 'l', long = "lines")]
+    lines: bool,
+
+    #[arg(short = 'w', long = "words")]
+    words: bool,
+
+    #[arg(file: "FILE")]
+    file: Option<String>,
+}
+
+#[derive(Default)]
+struct Counts {
+    lines: usize,
+    words: usize,
+    bytes: usize,
+}
+
+fn main() {
+    pub fn read_file(file_path: &str) -> String {
+        let mut file = File::open(file_path).expect("Fail to open the file");
+        let mut content = String::new();
+        file.read_to_string(&mut content)
+            .expect("Fail to read the file");
+        content
+    }
+
+    pub fn count_words_simple(text: String) -> usize {
+        text.lines()
+            .flat_map(|line| line.split_whitespace())
+            .count()
+    }
+}

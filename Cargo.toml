@@ -1,0 +1,10 @@
+[package]
+name = "xp_system"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+clap = { version = "4.5.42", features = ["derive"] }
+diesel = { version = "2.2.12", default-features = false, features = ["sqlite"] }
+io = "0.0.2"
+ratatui = { version = "0.29.0", features = ["all-widgets"] }
